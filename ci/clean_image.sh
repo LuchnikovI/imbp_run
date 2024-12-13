@@ -11,9 +11,9 @@ id=$(docker images -q ${IMBP_IMAGE_NAME})
 if [[ -z $id ]]; then
     log INFO ${IMBP_IMAGE_NAME} does not exist
     exit 1
-fi
+fi 
 
-if docker image rmi $id; then
+if docker image rmi -f $id; then
     log INFO ${IMBP_IMAGE_NAME} image is cleaned
 else
     log ERROR Failed to clean ${IMBP_IMAGE_NAME} image

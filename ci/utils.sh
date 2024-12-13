@@ -4,6 +4,9 @@ ci_scripts_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 
 export IMBP_IMAGE_NAME='imbp_run'
 export IMBP_BASE_IMAGE='julia:1.11.2'
+export IMBP_UID=$(id -u)
+export IMBP_GID=$(id -g)
+export IMBP_UNAME=$(id -un ${IMBP_UID})
 export IMBP_LOG_LEVELS='DEBUG INFO WARNING ERROR'
 
 log() {

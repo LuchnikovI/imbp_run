@@ -14,7 +14,10 @@ docker buildx build --tag "${IMBP_IMAGE_NAME}" -f - ${script_dir}/.. <<EOF
 FROM ${IMBP_BASE_IMAGE}
 WORKDIR /imbp_run
 COPY . .
-RUN export DEBIAN_FRONTEND=noninteractive && \
+RUN groupadd -g ${IMBP_GID} ${IMBP_UNAME} && \
+    useradd -m -u ${IMBP_UID} -g ${IMBP_GID} -s /bin/bash ${IMBP_UNAME} && \
+    export DEBIAN_FRONTEND=noninteractive && \
+    su - $(id -un ${IMBP_UID}) && \
     julia /imbp_run/ci/configure_pkgs.jl
 EOF
 
