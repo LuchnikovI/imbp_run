@@ -1,8 +1,5 @@
 export HeavyHexIBM
 
-ZZ = ComplexF64[1 0 0 0 ; 0 -1 0 0 ; 0 0 -1 0 ; 0 0 0 1]
-X = ComplexF64[0 1 ; 1 0]
-
 struct HeavyHexIBM <: AbstractLattice
     time_steps::Int
     theta::Float64
@@ -18,6 +15,6 @@ function get_specification(lc::HeavyHexIBM)
         [[Mixing(-(lc.theta / 2)) for _ in 1:lc.time_steps] for _ in 1:5], # one-qubit gates
         [[ZZInteraction(pi / 4) for _ in 1:lc.time_steps] for _ in 1:6],   # two-qubit gates
         [(1, 2), (4, 5), (2, 4), (5, 3), (2, 3), (1, 5)],                  # layout
-        2,                                                                 # target qubit whose dynamics is simulated
+        3,                                                                 # target qubit whose dynamics is simulated
     )
 end
